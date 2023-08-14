@@ -1,0 +1,27 @@
+server:
+  http_listen_port: 0
+  grpc_listen_port: 0
+  log_level: info
+
+logs:
+  configs:
+  - clients:
+    - basic_auth:
+        password: glc_eyJvIjoiNzI2MDIwIiwibiI6InN0YWNrLTY5ODA1OC1obC1mYXJnYXRlIiwiayI6IkE5OEoyY3A4ejd5bzFSN0xScjZsN1czaCIsIm0iOnsiciI6InByb2QtZXUtd2VzdC0yIn19
+        username: 651096
+      url: https://logs-prod-012.grafana.net/loki/api/v1/push
+    name: fargate
+    positions:
+      filename: /tmp/positions.yaml
+    scrape_configs:
+      # Add here any snippet that belongs to the `logs.configs.scrape_configs` section.
+      # For a correct indentation, paste snippets copied from Grafana Cloud at the beginning of the line.
+    - job_name: fargate-logs
+      static_configs:
+      - targets:
+        - localhost
+        labels:
+          __path__: /var/log/*.log
+          instance: ecs
+          job: fargate-logs
+ 
